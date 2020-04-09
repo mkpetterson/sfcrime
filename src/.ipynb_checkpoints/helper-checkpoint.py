@@ -65,12 +65,38 @@ def plotter(df, x, columns, title=None):
     return None
 
 
-def plotter_onegraph(df, x, columns):
+def plotter_onegraph(df, x, columns, columnsax2=None):
+    """ Plots several columns from dataframe all on one plot. 
+    If desired, can plot additional data on secondary axis. 
+    
+    Inputs
+    
+    
+    Returns
+    
+    
+    """
     
     fig, ax = plt.subplots()
     for col in columns:
         ax.plot(df[x], df[col], label=col)
-  
+        ax.set_yscale('log')
+        ax.set_xlabel(x)
+        ax.legend(loc='upper left', bbox_to_anchor=(0.00, 0.84))
+
+#    plt.legend()    
+    ax.set_ylabel('Counts')
+
+    if columnsax2:
+        ax2 = ax.twinx()
+        
+        color='green'
+        ax2.plot(df[x], df[columnsax2], 'g--')
+        ax2.set_ylabel('Fraction')
+        ax2.tick_params(axis='y', color=color)
+        ax2.legend(loc='upper left', bbox_to_anchor=(0.00, 0.84))
+        ax2.set_ylim(0.1, 0.2)
+        
     plt.legend()
     plt.xlabel(x)
     fig.tight_layout()

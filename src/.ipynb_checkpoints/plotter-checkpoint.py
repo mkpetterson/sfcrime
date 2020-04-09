@@ -59,7 +59,7 @@ def plot_scatter(df, year):
     # Plot
     fig, ax = plt.subplots()
     im = ax.scatter(crime_map['Long'], crime_map['Lat'], c=crime_map['Count'], 
-                    cmap='bwr', vmin=0, vmax=200, alpha=.3, s=5)
+                    vmin=50, vmax=300, alpha=.8, s=5)
     ax.set_xlim(-122.55, -122.34)
     ax.set_ylim(37.7, 37.83)
     ax.set_xlabel('Longitude')
