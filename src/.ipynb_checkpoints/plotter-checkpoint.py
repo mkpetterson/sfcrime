@@ -70,3 +70,4 @@ def plot_scatter(df, year):
     plt.savefig(year+'.png', dpi=350)
     
     return None
+
