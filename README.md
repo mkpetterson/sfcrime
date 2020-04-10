@@ -16,7 +16,7 @@ I initially set out to find whether or not the level of theft from car break-ins
 
 <b>Overview of the dataset</b>
 - Over 2 million entries spanning 2003-2017
-- 33 columns, including Category, Description, Address, and X & Y GPS coordinates
+- 33 columns, including Category, Description, Address, Police District, and X & Y GPS coordinates
 - Specific descriptions for theft from vehicles
     
     
@@ -25,7 +25,7 @@ I initially set out to find whether or not the level of theft from car break-ins
 
 Due to the size of the dataset, I initially started out using spark via a docker container. Using spark allowed quick exploration of the data and let me figure out which columns were extranneous. I also included some SQL queries when probing which descriptions are considered "violent" vs "non-violent" crime by using the LIKE command. I never knew there were so many kinds of assault.
 
-Ultimately I eliminated 17 columns and partitioned the data out by year. The data could then be read into pandas dataframes, which I find more comfortable to use for detailed analysis and plotting. 
+Ultimately I eliminated 20 columns and partitioned the data out by year. The data could then be read into pandas dataframes, which I find more comfortable to use for detailed analysis and plotting. 
 
 <b>General Process Flow:</b>
 
@@ -44,10 +44,10 @@ Plotting the number of reports over time. Note that the overlay is the neighborh
 
 ## General Crime Statistics
    
-The top 10 crimes as classified by category using tree mapping:
+The top 10 crimes as classified by Category using tree mapping:
     ![alttext](data/images/crimetreecat.png)
     
-The top 10 crimes as classified by description using tree mapping:
+The top 10 crimes as classified by Description using tree mapping:
     ![alttext](data/images/crimetreedesc.png)
     
     
@@ -84,8 +84,8 @@ While the incidence of car break-ins does increase after 2014, clearly the trend
 <img src="data/images/year-over-year.png" alt="Drawing" style="width: 500px;" align="center"/>
 
 
-- Average year-over-year difference 2011 - 2014: 0.017 or 1.7% increase
-- Average year-over-year difference 2014 - 2017: 0.019 or 1.9% increase
+- Average year-over-year difference 2012 - 2014: 27% increase
+- Average year-over-year difference 2015 - 2017: 13.3% increase
 
 
 <b>My hypothesis is incorrect-ish.</b> While car thefts are increasing after 2014, there is no marked difference in the 3 years prior to 2014 and the 3 years after 2014. This was roughly calculated by averaging the year over year difference from 2011-2014 and from 2014-2017. Major contributing factors, such as the economic climate, make drawing a conclusion about the ramifications of Prop 47 difficult. 
@@ -98,11 +98,11 @@ Since the previous results showed no effect, I wanted to look at how the economi
 
 <img src="data/images/car_vs_income.png" alt="Drawing" style="width: 500px;" align="center"/>
 
-Using the stats.pearsonr() method to look at the correlation coefficient and p-value between the two datasets:
-- Correlation coefficient 0.86
-- P-value of 0.0003
+I used the stats.spearmanr() method to look at the correlation coefficient and p-value between the two datasets. Note that Pearson's method requires the two datasets to be normally distributed, which is why I used the <a href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.spearmanr.html">Spearman's correlation</a>. 
+- Correlation coefficient 0.76
+- P-value of 0.0045
 
-The correlation coefficient is positive and close to one, indicating a strong positive relationship between the two datasets. The p-value is extrememly low; the probability of seeing this relationship given there is no correlation is 0.03% and we can conclude that there is a relationship between thefts from vehicles and median income. 
+The correlation coefficient is positive and in the upper quartile, indicating a medium positive relationship between the two datasets. The p-value is low; the probability of seeing this relationship given there is no correlation is 0.45% and we can conclude that there is a relationship between thefts from vehicles and median income at a significance level of 0.05. 
 
 
 ## Digging Deeper: Nothing happens at 4am
@@ -191,8 +191,5 @@ San Francisco Geographical Information: https://data.sfgov.org/Geographic-Locati
 Income Information: https://www.deptofnumbers.com/income/california/san-francisco/
 
 https://sfgov.org/sfplanningarchive/sites/default/files/FileCenter/Documents/8779-SFProfilesByNeighborhood_2010May.pdf
-
-   
-
 
    
