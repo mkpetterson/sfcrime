@@ -44,7 +44,7 @@ def binning(df):
     
     return array, lat, long, mag
 
-
+import shapefile as shp 
 def plot_scatter(df, year):
 
     # Bin the data and get crime counts for GPS coordinates
@@ -58,8 +58,20 @@ def plot_scatter(df, year):
     
     # Plot
     fig, ax = plt.subplots()
+    
+    # Requires the pyshp package
+    file = "geo_export_56962ed9-324d-4175-9698-21ee69259dea.shp"
+    sf = shp.Reader(file)
+
+    for shape in sf.shapeRecords():
+        x = [i[0] for i in shape.shape.points[:]]
+        y = [i[1] for i in shape.shape.points[:]]
+        plt.plot(x,y, color='gray', linewidth=0.7)
+
+    
+    
     im = ax.scatter(crime_map['Long'], crime_map['Lat'], c=crime_map['Count'], 
-                    vmin=50, vmax=300, alpha=.8, s=5)
+                    cmap='bwr',vmin=0, vmax=300, alpha=.4, s=5)
     ax.set_xlim(-122.55, -122.34)
     ax.set_ylim(37.7, 37.83)
     ax.set_xlabel('Longitude')
