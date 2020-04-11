@@ -5,11 +5,11 @@ While staying at my parent's house in December of 2019, I was woken up by a car 
 
 Anecdotal evidence from family and friends still living in the city is that car break-ins have increased substatially in the past several years, and some pointed to the passaged of Proposition 47 in 2014 as one influencing factor. 
 
-Proposition 47, which classifies many non-violent crimes as misdemenors, aims to reduce prison populations and prevent highly punitive punishments for relatively minor crimes. I was interested in if this proposition led to a higher incidence in thefts from vehicles. 
+Proposition 47, which classifies many non-violent crimes as misdemeanors, aims to reduce prison populations and prevent highly punitive consequences for relatively minor crimes. I was interested in if this proposition led to a higher incidence in thefts from vehicles. 
 
 The San Francisco Police Department keeps <a href="https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-Historical-2003/tmnf-yvry">records of all crime reports </a>, including information such as crime location, description, date & time, and whether or not the crime as resolved. The dataset spans 15 years, giving insight into trends in the crime rate as the demographics of the city changes and new laws are enacted. 
 
-I initially set out to find whether or not the level of theft from car break-ins increased markedly relative to other crime after the passing of this proposition. I also anticipated that the rate of resolving said crimes would be lower. While that question is answered in a fairly qualitative way, I also spent time doing general exploratory data analysis to look at different aspects of crime in San Francisco. 
+I initially set out to find whether or not the level of theft from car break-ins increased markedly relative to other crime after the passing of this proposition. I also anticipated that the rate of resolving said crimes would be lower and that there might be some correlation with gentrification in San Francisco. I also spent time doing general exploratory data analysis to look at different aspects of crime in San Francisco. 
 
 
 ## Dataset overview
@@ -19,19 +19,19 @@ I initially set out to find whether or not the level of theft from car break-ins
 - 33 columns, including Category, Description, Address, Police District, and X & Y GPS coordinates
 - Specific descriptions for theft from vehicles
     
-    
+![alttext](data/images/crime_screenshot.png)
     
 <b>Analysis</b>
 
-Due to the size of the dataset, I initially started out using spark via a docker container. Using spark allowed quick exploration of the data and let me figure out which columns were extranneous. I also included some SQL queries when probing which descriptions are considered "violent" vs "non-violent" crime by using the LIKE command. I never knew there were so many kinds of assault.
+Due to the size of the dataset, I initially started out using spark via a docker container. Using spark allowed quick exploration of the data and let me figure out which columns were extranneous. I also included SQL queries when probing which descriptions are considered "violent" vs "non-violent" crime by using the LIKE command.
 
 Ultimately I eliminated 20 columns and partitioned the data out by year. The data could then be read into pandas dataframes, which I find more comfortable to use for detailed analysis and plotting. 
 
 <b>General Process Flow:</b>
 
-Read data in spark -> explore via spark and SQL -> filter data -> transform to pandas -> explore and plot and calculate   
+Read data in spark -> explore via spark and SQL -> filter spark dataframes -> transform to pandas -> explore, plot and calculate   
    
-   
+
    
    
 ## One GIF To Rule Them All
@@ -51,17 +51,17 @@ The top 10 crimes as classified by Description using tree mapping:
     ![alttext](data/images/crimetreedesc.png)
     
     
-The total number of crimes and the fraction of those that violent
+The total number of crimes and the fraction of those that are violent
     ![alttext](data/images/crime_in_sf.png)
     
     
 
-<img src="data/images/resolution.png" alt="Drawing" style="width: 400px;" align="center"/>
+<img src="data/images/resolution.png" alt="Drawing" style="width: 500px;" align="center"/>
 
     
     
     
-<b>Initial Conclusions:</b>
+<b>Initial Observations:</b>
 
 - The total number of crimes increases slightly, but mostly due to an uptick in non-violent crime. <b>Could a portion of this be due to car break-ins? </b>
 
@@ -96,7 +96,7 @@ While the incidence of car break-ins does increase after 2014, clearly the trend
 
 Since the previous results showed no effect, I wanted to look at how the economic health of San Francisco relates to thefts from vehicles and hypothesized that car break-ins were trending with the economy. I used median income in San Francisco as a one dimensional marker for the economic health of the city. 
 
-<img src="data/images/car_vs_income.png" alt="Drawing" style="width: 500px;" align="center"/>
+<img src="data/images/car_vs_income2.png" alt="Drawing" style="width: 500px;" align="center"/>
 
 I used the stats.spearmanr() method to look at the correlation coefficient and p-value between the two datasets. Note that Pearson's method requires the two datasets to be normally distributed, which is why I used the <a href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.spearmanr.html">Spearman's correlation</a>. 
 - Correlation coefficient 0.76
@@ -128,18 +128,11 @@ My hypothesis: Income change both the number of crime reports and the fraction o
 
 <b>Neighborhoods vs Police Districts</b>
 <p align="left">
-    <img src="data/images/sfneighborhoods.png" alt="Drawing" style="width: 300px"/>
-    <img src="data/images/pddistrict.png" alt="Drawing" style="width: 350px"/>
+    <img src="data/images/sfneighborhoods.png" alt="Drawing" style="width: 200px"/>
 </p>
     
     
 Here is the data looking at income relative to crime counts.
-
-Red dots: [Taravel, Southern]
-
-Blue dots: [Park, Mission]
-
-Purple dots: [Northern, Richmond]
 
 ![alttext](data/images/income_vs_crime.png)
 
@@ -176,7 +169,7 @@ I do wish I had been able to do more hypothesis testing, but struggled with find
 ## Running the Code and Sources
 
 The project is broken up into 3 notebooks:
-- crime.ipynb, which takes in the csv listed below and transforms it into 14 csv files, one for each year
+- crime.ipynb, which takes in the csv listed below and transforms it into 15 csv files, one for each year
 - crime_analysis.ipynb, which imports the data as pandas and does the plotting and calculations
 - Heat Map.ipynb, which has the code for importing the shapefile and creating a heat map of crime across SF
 
