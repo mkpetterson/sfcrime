@@ -129,6 +129,7 @@ My hypothesis: Income change both the number of crime reports and the fraction o
 <b>Neighborhoods vs Police Districts</b>
 <p align="left">
     <img src="data/images/sfneighborhoods.png" alt="Drawing" style="width: 200px"/>
+    <img src="data/images/pddistrict.png" alt="Drawing" style="width: 250px"/>
 </p>
     
     
