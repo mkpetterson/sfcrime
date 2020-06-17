@@ -1,5 +1,8 @@
 # Crime in San Francisco: 2003-2017
 
+![badge](https://img.shields.io/badge/last%20modified-april%20%202020-success)
+![badge](https://img.shields.io/badge/status-completed-success)
+
 ## Introduction 
 While staying at my parent's house in December of 2019, I was woken up by a car alarm at 7am. I tried to fall back asleep, but the alarm was to loud. I walked to the window and witnessed someone breaking into and stealing from the car parked directly in front of our house. I called 911 and gave them details of the crime as it was being committed and also mentioned that I had video of the entire incident. In addition to the 911 call I logged the incident on a SF Police website built for reporting car break-ins. I expected to get a call from the police asking for the video or more information and heard nothing back. 
 
@@ -180,10 +183,8 @@ Lastly, there are several shapefiles downloaded from San Francisco Geographical 
 
 
 <b> Sources</b>
-Police Crime Statistics: https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-Historical-2003/tmnf-yvry
-San Francisco Geographical Information: https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h"
-Income Information: https://www.deptofnumbers.com/income/california/san-francisco/
-
-https://sfgov.org/sfplanningarchive/sites/default/files/FileCenter/Documents/8779-SFProfilesByNeighborhood_2010May.pdf
+- Police Crime Statistics: https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-Historical-2003/tmnf-yvry
+- San Francisco Geographical Information: https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h"
+- Income Information: https://www.deptofnumbers.com/income/california/san-francisco/ and https://sfgov.org/sfplanningarchive/sites/default/files/FileCenter/Documents/8779-SFProfilesByNeighborhood_2010May.pdf
 
    

@@ -1,22 +1,26 @@
 # Data Manipulation
 import pandas as pd
-# Calculations and Numerical Operations
 import numpy as np
-# Data Visualization
-import plotly
-from plotly import tools
-import plotly.offline as py
-from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
-import plotly.graph_objs as go
-from plotly.tools import make_subplots
+
 
 #Geographic Data Visualization
 import geopandas as gpd
 from shapely.geometry import Point, Polygon, shape
 import matplotlib.pyplot as plt
+import shapefile as shp 
 
 
 def binning(df):
+    """ Create bins for crimes based on GPS data
+    
+    Inputs
+    pandas dataframe 
+    
+    Returns
+    2d array with crime counts in each bin
+    lists with latitute, longitude, and count (flattened array)    
+    
+    """
     xvals = list(df['X'])
     yvals = list(df['Y'])
     
@@ -44,8 +48,17 @@ def binning(df):
     
     return array, lat, long, mag
 
-import shapefile as shp 
+
 def plot_scatter(df, year):
+    """ Creates scatter plot of crime data
+    
+    Inputs
+    pandas dataframe
+    year: string
+       
+    Returns
+    None
+    """
 
     # Bin the data and get crime counts for GPS coordinates
     array, lat, long, mag = binning(df)
@@ -60,14 +73,14 @@ def plot_scatter(df, year):
     fig, ax = plt.subplots()
     
     # Requires the pyshp package
-    file = "geo_export_56962ed9-324d-4175-9698-21ee69259dea.shp"
+    file = "AnalysisNeighborhoods/geo_export_56962ed9-324d-4175-9698-21ee69259dea.shp"
     sf = shp.Reader(file)
 
+    # Plot the data and the shapefile
     for shape in sf.shapeRecords():
         x = [i[0] for i in shape.shape.points[:]]
         y = [i[1] for i in shape.shape.points[:]]
         plt.plot(x,y, color='gray', linewidth=0.7)
-
     
     
     im = ax.scatter(crime_map['Long'], crime_map['Lat'], c=crime_map['Count'], 

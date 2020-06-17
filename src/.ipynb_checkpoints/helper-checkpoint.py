@@ -44,11 +44,13 @@ def plotter(df, x, columns, title=None):
     num_plots = len(columns)
     rows = math.ceil(num_plots/2)
     
+    # Make fig depending on # of subplots
     if num_plots>2:
         fig, axes = plt.subplots(rows, 2, figsize=(24,12))
     else:
         fig, axes = plt.subplots(rows, num_plots, figsize=(10,4))
     
+    # Plot
     for i, ax in enumerate(axes.flatten()):
         
         if i < num_plots:         
@@ -132,6 +134,14 @@ def resolution(df):
 
 
 def vresolution(df):
+    """ Returns fraction of violent vs non-violent crime
+    
+    Inputs
+    pandas dataframe
+    
+    Returns
+    fraction of violence and non-violence, both floats
+    """
     
     v, n = violence(df)    
     vfrac = round(resolution(v), 5)
