@@ -3,6 +3,15 @@
 ![badge](https://img.shields.io/badge/last%20modified-april%20%202020-success)
 ![badge](https://img.shields.io/badge/status-completed-success)
 
+## Table of Contents
+[Introdution](https://github.com/mkpetterson/sfcrime#introduction)
+[Dataset Overview](https://github.com/mkpetterson/sfcrime#dataset-overview)
+[General Crime Statistics](https://github.com/mkpetterson/sfcrime#general-crime-statistics)
+[Crime by Time of Day](https://github.com/mkpetterson/sfcrime#digging-deeper-nothing-happens-at-4am)
+[Crime by District](https://github.com/mkpetterson/sfcrime#crime-by-district)
+[Conclusions](https://github.com/mkpetterson/sfcrime#conclusions)
+[Notes](https://github.com/mkpetterson/sfcrime#notes)
+
 ## Introduction 
 While staying at my parent's house in December of 2019, I was woken up by a car alarm at 7am. I tried to fall back asleep, but the alarm was to loud. I walked to the window and witnessed someone breaking into and stealing from the car parked directly in front of our house. I called 911 and gave them details of the crime as it was being committed and also mentioned that I had video of the entire incident. In addition to the 911 call I logged the incident on a SF Police website built for reporting car break-ins. I expected to get a call from the police asking for the video or more information and heard nothing back. 
 
@@ -37,7 +46,7 @@ Read data in spark -> explore via spark and SQL -> filter spark dataframes -> tr
 
    
    
-## One GIF To Rule Them All
+### One GIF To Rule Them All
    
 Plotting the number of reports over time. Note that the overlay is the neighborhoods, not the police districts. This map was created by binning the crime GPS data and then plotting those over a <a href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h">shapefile of San Francisco Neighborhoods.</a>     
 ![SegmentLocal](data/images/crime-sf.gif "segment") 
@@ -74,7 +83,7 @@ The total number of crimes and the fraction of those that are violent
     
     
 
-## Looking at car break-ins
+## Car Break-Ins
 
 My hypothesis is that theft from vehicles increased markedly after 2014. I used a stacked plot to show the number of thefts with the number of reports not related to thefts from vehicles. I also plotted the fraction of crimes attributed to theft from 2003-2017. 
 
@@ -84,7 +93,7 @@ My hypothesis is that theft from vehicles increased markedly after 2014. I used 
 While the incidence of car break-ins does increase after 2014, clearly the trend started around 2012. The peak at 2006 followed by a decline and bottoming out in 2009-20011 suggest that the recession had an effect on theft from vehicles. It's likely that the gentrification and economic boom in San Francisco following the recession has a higher correlation with thefts than the passing of Proposition 47. 
 
 
-<img src="data/images/year-over-year.png" alt="Drawing" style="width: 500px;" align="center"/>
+<center><img src="data/images/year-over-year.png" alt="Drawing" width='500px' align="center"></center>
 
 
 - Average year-over-year difference 2012 - 2014: 27% increase
@@ -99,7 +108,7 @@ While the incidence of car break-ins does increase after 2014, clearly the trend
 
 Since the previous results showed no effect, I wanted to look at how the economic health of San Francisco relates to thefts from vehicles and hypothesized that car break-ins were trending with the economy. I used median income in San Francisco as a one dimensional marker for the economic health of the city. 
 
-<center><img src="data/images/car_vs_income2.png" alt="Drawing" width='500px' align="center"/>>center>
+<center><img src="data/images/car_vs_income2.png" alt="Drawing" width='500px' align="center"></center>
 
 I used the stats.spearmanr() method to look at the correlation coefficient and p-value between the two datasets. Note that Pearson's method requires the two datasets to be normally distributed, which is why I used the <a href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.spearmanr.html">Spearman's correlation</a>. 
 - Correlation coefficient 0.76
@@ -170,7 +179,7 @@ I do wish I had been able to do more hypothesis testing, but struggled with find
 
 
 
-## Running the Code and Sources
+## Notes
 
 The project is broken up into 3 notebooks:
 - crime.ipynb, which takes in the csv listed below and transforms it into 15 csv files, one for each year
