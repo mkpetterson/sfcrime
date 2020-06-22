@@ -133,17 +133,22 @@ I plotted all the years on top of each other. While that makes it hard to see th
     
 <b> THIS SECTION IS WHAT NOT TO DO!</b>    
 
-This is the more difficult part of the analysis and one which I wish I hadn't left until Thursday night. San Francisco has 10 police districts and 36 official neighborhoods. I wanted to explore how the crime rate changes in each neighborhood, but instead had to go by each district based on the data avilable in the dataset.
+This is the more difficult part of the analysis and one which I wish I hadn't left until the end. San Francisco has 10 police districts and 36 official neighborhoods. I wanted to explore how the crime rate changes in each neighborhood, but instead had to go by each district based on the data avilable in the dataset.
 
-My hypothesis: Income change both the number of crime reports and the fraction of resolved reports
+My hypothesis: Income changes both the number of crime reports and the fraction of resolved reports
 
 
 <b>Neighborhoods vs Police Districts</b>
-<p align="left">
-    <img src="data/images/sfneighborhoods.png" alt="Drawing" style="width: 200px"/>
-    <img src="data/images/pddistrict.png" alt="Drawing" style="width: 250px"/>
-</p>
+<table>
+    <th>SF Neighborhoods</th>
+    <th>PD Districts</th>
+    <tr>
+        <td><img src="data/images/sfneighborhoods.png" alt="Drawing" style="width: 400px"/></td>
+        <td><img src="data/images/pddistrict.png" alt="Drawing" style="width: 450px"/></td>
+    </tr>
+</table>
     
+
     
 Here is the data looking at income relative to crime counts.
 
