@@ -99,7 +99,7 @@ While the incidence of car break-ins does increase after 2014, clearly the trend
 
 Since the previous results showed no effect, I wanted to look at how the economic health of San Francisco relates to thefts from vehicles and hypothesized that car break-ins were trending with the economy. I used median income in San Francisco as a one dimensional marker for the economic health of the city. 
 
-<img src="data/images/car_vs_income2.png" alt="Drawing" style="width: 500px;" align="center"/>
+<img src="data/images/car_vs_income2.png" alt="Drawing" width='500px' align="center"/>
 
 I used the stats.spearmanr() method to look at the correlation coefficient and p-value between the two datasets. Note that Pearson's method requires the two datasets to be normally distributed, which is why I used the <a href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.spearmanr.html">Spearman's correlation</a>. 
 - Correlation coefficient 0.76
