@@ -68,7 +68,7 @@ The total number of crimes and the fraction of those that are violent
     
     
 <p align='middle'>
-<img src="data/images/resolution.png" alt="Drawing" width='600px' align="center"/>
+<img src="data/images/resolution.png" alt="Drawing" width='500px' align="center"/>
 </p>
     
     
@@ -92,9 +92,10 @@ My hypothesis is that theft from vehicles increased markedly after 2014. I used 
 
 While the incidence of car break-ins does increase after 2014, clearly the trend started around 2012. The peak at 2006 followed by a decline and bottoming out in 2009-20011 suggest that the recession had an effect on theft from vehicles. It's likely that the gentrification and economic boom in San Francisco following the recession has a higher correlation with thefts than the passing of Proposition 47. 
 
+<p align='middle'>
 
-<center><img src="data/images/year-over-year.png" alt="Drawing" width='500px' align="center"></center>
-
+    <img src="data/images/year-over-year.png" alt="Drawing" width='500px' align="center">
+</p>
 
 - Average year-over-year difference 2012 - 2014: 27% increase
 - Average year-over-year difference 2015 - 2017: 13.3% increase
@@ -145,7 +146,7 @@ My hypothesis: Income changes both the number of crime reports and the fraction 
     <th>SF Neighborhoods</th>
     <th>PD Districts</th>
     <tr>
-        <td><img src="data/images/sfneighborhoods.png" alt="Drawing" style="width: 400px"/></td>
+        <td><img src="data/images/sfneighborhoods.png" alt="Drawing" style="width: 350px"/></td>
         <td><img src="data/images/pddistrict.png" alt="Drawing" style="width: 450px"/></td>
     </tr>
 </table>
