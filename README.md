@@ -1,16 +1,16 @@
 # Crime in San Francisco: 2003-2017
 
-![badge](https://img.shields.io/badge/last%20modified-april%20%202020-success)
-![badge](https://img.shields.io/badge/status-completed-success)
+![badge](https://img.shields.io/badge/last%20modified-june%20%202020-success)
+![badge](https://img.shields.io/badge/status-in%20progress-yellow)
 
 ## Table of Contents
-[Introdution](https://github.com/mkpetterson/sfcrime#introduction)
-[Dataset Overview](https://github.com/mkpetterson/sfcrime#dataset-overview)
-[General Crime Statistics](https://github.com/mkpetterson/sfcrime#general-crime-statistics)
-[Crime by Time of Day](https://github.com/mkpetterson/sfcrime#digging-deeper-nothing-happens-at-4am)
-[Crime by District](https://github.com/mkpetterson/sfcrime#crime-by-district)
-[Conclusions](https://github.com/mkpetterson/sfcrime#conclusions)
-[Notes](https://github.com/mkpetterson/sfcrime#notes)
+- [Introdution](https://github.com/mkpetterson/sfcrime#introduction)
+- [Dataset Overview](https://github.com/mkpetterson/sfcrime#dataset-overview)
+- [General Crime Statistics](https://github.com/mkpetterson/sfcrime#general-crime-statistics)
+- [Crime by Time of Day](https://github.com/mkpetterson/sfcrime#digging-deeper-nothing-happens-at-4am)
+- [Crime by District](https://github.com/mkpetterson/sfcrime#crime-by-district)
+- [Conclusions](https://github.com/mkpetterson/sfcrime#conclusions)
+- [Notes](https://github.com/mkpetterson/sfcrime#notes)
 
 ## Introduction 
 While staying at my parent's house in December of 2019, I was woken up by a car alarm at 7am. I tried to fall back asleep, but the alarm was to loud. I walked to the window and witnessed someone breaking into and stealing from the car parked directly in front of our house. I called 911 and gave them details of the crime as it was being committed and also mentioned that I had video of the entire incident. In addition to the 911 call I logged the incident on a SF Police website built for reporting car break-ins. I expected to get a call from the police asking for the video or more information and heard nothing back. 
