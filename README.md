@@ -31,7 +31,7 @@ I initially set out to find whether or not the level of theft from car break-ins
 - 33 columns, including Category, Description, Address, Police District, and X & Y GPS coordinates
 - Specific descriptions for theft from vehicles
     
-![alttext](data/images/crime_screenshot.png)
+![alttext](images/crime_screenshot.png)
     
 <b>Analysis</b>
 
@@ -49,7 +49,7 @@ Read data in spark -> explore via spark and SQL -> filter spark dataframes -> tr
 ### One GIF To Rule Them All
    
 Plotting the number of reports over time. Note that the overlay is the neighborhoods, not the police districts. This map was created by binning the crime GPS data and then plotting those over a <a href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h">shapefile of San Francisco Neighborhoods.</a>     
-![SegmentLocal](data/images/crime-sf.gif "segment") 
+![SegmentLocal](images/crime-sf.gif "segment") 
    
    
    
@@ -57,18 +57,18 @@ Plotting the number of reports over time. Note that the overlay is the neighborh
 ## General Crime Statistics
    
 The top 10 crimes as classified by Category using tree mapping:
-    ![alttext](data/images/crimetreecat.png)
+    ![alttext](images/crimetreecat.png)
     
 The top 10 crimes as classified by Description using tree mapping:
-    ![alttext](data/images/crimetreedesc.png)
+    ![alttext](images/crimetreedesc.png)
     
     
 The total number of crimes and the fraction of those that are violent
-    ![alttext](data/images/crime_in_sf.png)
+    ![alttext](images/crime_in_sf.png)
     
     
 <p align='middle'>
-<img src="data/images/resolution.png" alt="Drawing" width='500px' align="center"/>
+<img src="images/resolution.png" alt="Drawing" width='500px' align="center"/>
 </p>
     
     
@@ -87,14 +87,13 @@ The total number of crimes and the fraction of those that are violent
 
 My hypothesis is that theft from vehicles increased markedly after 2014. I used a stacked plot to show the number of thefts with the number of reports not related to thefts from vehicles. I also plotted the fraction of crimes attributed to theft from 2003-2017. 
 
-![alttext](data/images/car_theft.png)
+![alttext](images/car_theft.png)
 
 
 While the incidence of car break-ins does increase after 2014, clearly the trend started around 2012. The peak at 2006 followed by a decline and bottoming out in 2009-20011 suggest that the recession had an effect on theft from vehicles. It's likely that the gentrification and economic boom in San Francisco following the recession has a higher correlation with thefts than the passing of Proposition 47. 
 
 <p align='middle'>
-
-    <img src="data/images/year-over-year.png" alt="Drawing" width='500px' align="center">
+<img src="images/year-over-year.png" alt="Drawing" width='500px' align="center">
 </p>
 
 - Average year-over-year difference 2012 - 2014: 27% increase
@@ -110,7 +109,7 @@ While the incidence of car break-ins does increase after 2014, clearly the trend
 Since the previous results showed no effect, I wanted to look at how the economic health of San Francisco relates to thefts from vehicles and hypothesized that car break-ins were trending with the economy. I used median income in San Francisco as a one dimensional marker for the economic health of the city. 
 
 <p align='middle'>
-<img src="data/images/car_vs_income2.png" alt="Drawing" width='500px' align="center">
+<img src="images/car_vs_income2.png" alt="Drawing" width='500px' align="center">
 </p>
 
 I used the stats.spearmanr() method to look at the correlation coefficient and p-value between the two datasets. Note that Pearson's method requires the two datasets to be normally distributed, which is why I used the <a href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.spearmanr.html">Spearman's correlation</a>. 
@@ -127,16 +126,14 @@ Do crime reports follow a uniform distribution? My intuition says no - some type
 I plotted all the years on top of each other. While that makes it hard to see the year over year change, it makes is very easy to see that there is a predictable pattern every year. The smeared out regions on the tops of the bars show the slight variation year to year. Given more time, I'd like to dig into the variation by day of week a little more and see if there is a difference based on neighborhood. 
 
 
-![alttext](data/images/crime_by_day_hour.png)
+![alttext](images/crime_by_day_hour.png)
     
     
     
     
 ## Crime By District    
-    
-<b> THIS SECTION IS WHAT NOT TO DO!</b>    
 
-This is the more difficult part of the analysis and one which I wish I hadn't left until the end. San Francisco has 10 police districts and 36 official neighborhoods. I wanted to explore how the crime rate changes in each neighborhood, but instead had to go by each district based on the data avilable in the dataset.
+San Francisco has 10 police districts and 36 official neighborhoods. I wanted to explore how the crime rate changes in each neighborhood, but instead had to go by each district based on the data avilable in the dataset.
 
 My hypothesis: Income changes both the number of crime reports and the fraction of resolved reports
 
@@ -146,8 +143,8 @@ My hypothesis: Income changes both the number of crime reports and the fraction 
     <th>SF Neighborhoods</th>
     <th>PD Districts</th>
     <tr>
-        <td><img src="data/images/sfneighborhoods.png" alt="Drawing" style="width: 350px"/></td>
-        <td><img src="data/images/pddistrict.png" alt="Drawing" style="width: 450px"/></td>
+        <td><img src="images/sfneighborhoods.png" alt="Drawing" style="width: 350px"/></td>
+        <td><img src="images/pddistrict.png" alt="Drawing" style="width: 400px"/></td>
     </tr>
 </table>
     
@@ -155,7 +152,7 @@ My hypothesis: Income changes both the number of crime reports and the fraction 
     
 Here is the data looking at income relative to crime counts.
 
-![alttext](data/images/income_vs_crime.png)
+![alttext](images/income_vs_crime.png)
 
     
 Clearly there is no trend in the crime reports vs income. I was unable to quantitatively answer this question due mostly to a lack of data collection, as the previous conclusion looking at thefts from cars is that income does play a role in crime. 
