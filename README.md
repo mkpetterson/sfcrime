@@ -4,8 +4,8 @@
 ![badge](https://img.shields.io/badge/status-in%20progress-yellow)
 
 ## Table of Contents
-- [Introdution](https://github.com/mkpetterson/sfcrime#introduction)
-- [Dataset Overview](https://github.com/mkpetterson/sfcrime#dataset-overview)
+- [Introdution](#introduction)
+- [Dataset Overview](#dataset-overview)
 - [General Crime Statistics](https://github.com/mkpetterson/sfcrime#general-crime-statistics)
 - [Crime by Time of Day](https://github.com/mkpetterson/sfcrime#digging-deeper-nothing-happens-at-4am)
 - [Crime by District](https://github.com/mkpetterson/sfcrime#crime-by-district)
@@ -143,7 +143,7 @@ My hypothesis: Income changes both the number of crime reports and the fraction 
     <th>SF Neighborhoods</th>
     <th>PD Districts</th>
     <tr>
-        <td><img src="images/sfneighborhoods.png" alt="Drawing" style="width: 350px"/></td>
+        <td><img src="images/sfneighborhoods.png" alt="Drawing" style="width: 250px"/></td>
         <td><img src="images/pddistrict.png" alt="Drawing" style="width: 400px"/></td>
     </tr>
 </table>
