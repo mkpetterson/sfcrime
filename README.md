@@ -29,7 +29,7 @@ I initially set out to find whether or not the level of theft from car break-ins
 <b>Overview of the dataset</b>
 - Over 2 million entries spanning 2003-2017
 - 33 columns, including Category, Description, Address, Police District, and X & Y GPS coordinates
-- Specific descriptions for theft from vehicles
+- Specific descriptions of crimes, including "theft from vehicles"
     
 ![alttext](images/crime_screenshot.png)
     
@@ -46,7 +46,7 @@ Read data in spark -> explore via spark and SQL -> filter spark dataframes -> tr
 
    
    
-### One GIF To Rule Them All
+### Animated Crime Map
    
 Plotting the number of reports over time. Note that the overlay is the neighborhoods, not the police districts. This map was created by binning the crime GPS data and then plotting those over a <a href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h">shapefile of San Francisco Neighborhoods.</a>     
 ![SegmentLocal](images/crime-sf.gif "segment") 
@@ -56,9 +56,6 @@ Plotting the number of reports over time. Note that the overlay is the neighborh
 
 ## General Crime Statistics
    
-The top 10 crimes as classified by Category using tree mapping:
-    ![alttext](images/crimetreecat.png)
-    
 The top 10 crimes as classified by Description using tree mapping:
     ![alttext](images/crimetreedesc.png)
     
@@ -85,34 +82,17 @@ The total number of crimes and the fraction of those that are violent
 
 ## Car Break-Ins
 
-My hypothesis is that theft from vehicles increased markedly after 2014. I used a stacked plot to show the number of thefts with the number of reports not related to thefts from vehicles. I also plotted the fraction of crimes attributed to theft from 2003-2017. 
+My hypothesis is that theft from vehicles increased markedly after 2014. The stacked plot shows the number of thefts with the number of reports not related to thefts from vehicles. I also plotted the fraction of crimes attributed to theft from 2003-2017. 
 
 ![alttext](images/car_theft.png)
 
-
-While the incidence of car break-ins does increase after 2014, clearly the trend started around 2012. The peak at 2006 followed by a decline and bottoming out in 2009-20011 suggest that the recession had an effect on theft from vehicles. It's likely that the gentrification and economic boom in San Francisco following the recession has a higher correlation with thefts than the passing of Proposition 47. 
-
-<p align='middle'>
-<img src="images/year-over-year.png" alt="Drawing" width='500px' align="center">
-</p>
-
-- Average year-over-year difference 2012 - 2014: 27% increase
-- Average year-over-year difference 2015 - 2017: 13.3% increase
-
-
-<b>My hypothesis is incorrect-ish.</b> While car thefts are increasing after 2014, there is no marked difference in the 3 years prior to 2014 and the 3 years after 2014. This was roughly calculated by averaging the year over year difference from 2011-2014 and from 2014-2017. Major contributing factors, such as the economic climate, make drawing a conclusion about the ramifications of Prop 47 difficult. 
-
-
-
-<b> Economic Effects </b>
-
-Since the previous results showed no effect, I wanted to look at how the economic health of San Francisco relates to thefts from vehicles and hypothesized that car break-ins were trending with the economy. I used median income in San Francisco as a one dimensional marker for the economic health of the city. 
+While the incidence of car break-ins does increase after 2014, clearly the trend started around 2012. The peak at 2006 followed by a decline and bottoming out in 2009-20011 suggest that the recession had an effect on theft from vehicles. It's likely that the gentrification and economic boom in San Francisco following the recession has a higher correlation with thefts than the passing of Proposition 47.   
 
 <p align='middle'>
 <img src="images/car_vs_income2.png" alt="Drawing" width='500px' align="center">
 </p>
 
-I used the stats.spearmanr() method to look at the correlation coefficient and p-value between the two datasets. Note that Pearson's method requires the two datasets to be normally distributed, which is why I used the <a href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.spearmanr.html">Spearman's correlation</a>. 
+The stats.spearmanr() method was used to look at the correlation coefficient and p-value between the two datasets. Note that Pearson's method requires the two datasets to be normally distributed, which is why I used the <a href="https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.spearmanr.html">Spearman's correlation</a>. 
 - Correlation coefficient 0.76
 - P-value of 0.0045
 
@@ -120,6 +100,27 @@ The correlation coefficient is positive and in the upper quartile, indicating a 
 
 
 ## Digging Deeper: Time Series Analysis and Forecasting
+
+    
+### Time Series Analysis
+
+Time Series Analysis included looking at the trend-seasonal-residual composition of the crime and modeling via ARIMA. Crime was forecasted through 2020 using the paramters found in the best fit ARIMA model. 
+
+The [statsmodels](https://www.statsmodels.org/stable/tsa.html) library was used for all time series analysis and data was resampled at different intervals prior to differencing. 
+
+The order of operations were as follows:
+1. Resample data at various intervals to look at the TSR decomposition.
+2. Transform our non stationary series into a stationary series using differencing.
+3. Fit and ARIMA model to the stationary series, picking an initial p, q, r and then doing a grid search for the optimal parameters
+4. Forecasting using the best fit ARIMA model
+
+
+Here is a breakdown of the daily and hourly crime reports from 2003-2017. There is a lot to unpack here!
+
+![CrimeTrends](images/Crimetrends.png)
+
+A quick visual analysis shows that there tends to be a drop in crime right around December 25th and a huge spike around January 1st. 
+
 
 ### Nothing happens at 4am
 
@@ -129,8 +130,7 @@ I plotted all the years on top of each other. While that makes it hard to see th
 
 ![alttext](images/crime_by_day_hour.png)
     
-    
-### Time Series Analysis
+
     
     
 ## Crime By District    
