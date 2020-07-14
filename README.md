@@ -1,16 +1,16 @@
 # Crime in San Francisco: 2003-2017
 
-![badge](https://img.shields.io/badge/last%20modified-june%20%202020-success)
+![badge](https://img.shields.io/badge/last%20modified-july%20%202020-success)
 ![badge](https://img.shields.io/badge/status-in%20progress-yellow)
 
 ## Table of Contents
 - [Introdution](#introduction)
 - [Dataset Overview](#dataset-overview)
-- [General Crime Statistics](https://github.com/mkpetterson/sfcrime#general-crime-statistics)
-- [Crime by Time of Day](https://github.com/mkpetterson/sfcrime#digging-deeper-nothing-happens-at-4am)
-- [Crime by District](https://github.com/mkpetterson/sfcrime#crime-by-district)
-- [Conclusions](https://github.com/mkpetterson/sfcrime#conclusions)
-- [Notes](https://github.com/mkpetterson/sfcrime#notes)
+- [General Crime Statistics](#general-crime-statistics)
+- [Crime by Time of Day](#digging-deeper-time-series-analysis-and-forecasting)
+- [Crime by District](#crime-by-district)
+- [Conclusions](#conclusions)
+- [Notes](#notes)
 
 ## Introduction 
 While staying at my parent's house in December of 2019, I was woken up by a car alarm at 7am. I tried to fall back asleep, but the alarm was to loud. I walked to the window and witnessed someone breaking into and stealing from the car parked directly in front of our house. I called 911 and gave them details of the crime as it was being committed and also mentioned that I had video of the entire incident. In addition to the 911 call I logged the incident on a SF Police website built for reporting car break-ins. I expected to get a call from the police asking for the video or more information and heard nothing back. 
@@ -119,16 +119,18 @@ I used the stats.spearmanr() method to look at the correlation coefficient and p
 The correlation coefficient is positive and in the upper quartile, indicating a medium positive relationship between the two datasets. The p-value is low; the probability of seeing this relationship given there is no correlation is 0.45% and we can conclude that there is a relationship between thefts from vehicles and median income at a significance level of 0.05. 
 
 
-## Digging Deeper: Nothing happens at 4am
+## Digging Deeper: Time Series Analysis and Forecasting
+
+### Nothing happens at 4am
 
 Do crime reports follow a uniform distribution? My intuition says no - some types of crime require criminals/victim interaction, and these are more likely to occur at different times of day. Plotting both the hour of crime reports and the day of the week show that crime follows a predicatable pattern. 
 
-I plotted all the years on top of each other. While that makes it hard to see the year over year change, it makes is very easy to see that there is a predictable pattern every year. The smeared out regions on the tops of the bars show the slight variation year to year. Given more time, I'd like to dig into the variation by day of week a little more and see if there is a difference based on neighborhood. 
-
+I plotted all the years on top of each other. While that makes it hard to see the year over year change, it makes is very easy to see that there is a predictable pattern every year. The smeared out regions on the tops of the bars show the slight variation year to year. 
 
 ![alttext](images/crime_by_day_hour.png)
     
     
+### Time Series Analysis
     
     
 ## Crime By District    
@@ -143,8 +145,8 @@ My hypothesis: Income changes both the number of crime reports and the fraction 
     <th>SF Neighborhoods</th>
     <th>PD Districts</th>
     <tr>
-        <td><img src="images/sfneighborhoods.png" alt="Drawing" style="width: 250px"/></td>
-        <td><img src="images/pddistrict.png" alt="Drawing" style="width: 400px"/></td>
+        <td><img src="images/sfneighborhoods.png" alt="Drawing" width="250px"/></td>
+        <td><img src="images/pddistrict.png" alt="Drawing" width="250px"/></td>
     </tr>
 </table>
     
