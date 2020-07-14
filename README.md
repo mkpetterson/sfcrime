@@ -101,16 +101,13 @@ The correlation coefficient is positive and in the upper quartile, indicating a 
 
 ## Digging Deeper: Time Series Analysis and Forecasting
 
-    
-### Time Series Analysis
-
 Time Series Analysis included looking at the trend-seasonal-residual composition of the crime and modeling via ARIMA. Crime was forecasted through 2020 using the paramters found in the best fit ARIMA model. 
 
 The [statsmodels](https://www.statsmodels.org/stable/tsa.html) library was used for all time series analysis and data was resampled at different intervals prior to differencing. 
 
-The order of operations were as follows:
+The order of operations are as follows:
 1. Resample data at various intervals to look at the TSR decomposition.
-2. Transform our non stationary series into a stationary series using differencing.
+2. Check for stationarity and if needed, transform our non stationary series into a stationary series using differencing.
 3. Fit and ARIMA model to the stationary series, picking an initial p, q, r and then doing a grid search for the optimal parameters
 4. Forecasting using the best fit ARIMA model
 
@@ -119,7 +116,25 @@ Here is a breakdown of the daily and hourly crime reports from 2003-2017. There 
 
 ![CrimeTrends](images/Crimetrends.png)
 
-A quick visual analysis shows that there tends to be a drop in crime right around December 25th and a huge spike around January 1st. 
+A quick visual analysis shows that there is seasonality on several different time scales: hourly, daily, and monthly. There are also some repetitive troughs and peaks occuring on December 25th and January 1st, respectively. Changing the sampling to Monthly better shows the overall trend in the crime data over the years.
+<br>
+
+1. <b>Trend-Seasonal Decomposition with Monthly Sampling</b><br>
+
+![tsadecompM](images/tsadecomp_month.png)
+
+We can also look at the autocorrelations and partial autocorrelations with different sampling and easily pick out the significant time scales (peaks at different lag values). 
+
+![autocorrelations](images/autocorrelations.png)
+
+
+2. <b>Differenced series</b><br>
+Time series data needs to be made stationary prior to modeling, that is, any tuple of evenly spaced data points needs to be identically distributed (independence NOT necessary). In essence, the mean and variance are the same. Checking for stationarity is easily done with the Dickey-Fuller test using a null hypothesis that our data is NOT stationary. 
+
+![stationarity](images/stationarity_check.png)
+
+Our test statistic is quite large and our p-value is outside the 10% confidence interval, so we cannot reject the null and our series is assumed to not be stationary. 
+
 
 
 ### Nothing happens at 4am
