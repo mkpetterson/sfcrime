@@ -7,8 +7,7 @@
 - [Introdution](#introduction)
 - [Dataset Overview](#dataset-overview)
 - [General Crime Statistics](#general-crime-statistics)
-- [Crime by Time of Day](#digging-deeper-time-series-analysis-and-forecasting)
-- [Crime by District](#crime-by-district)
+- [Time Series Analysis and Forecasting](#digging-deeper-time-series-analysis-and-forecasting)
 - [Conclusions](#conclusions)
 - [Notes](#notes)
 
