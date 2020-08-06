@@ -135,8 +135,26 @@ Time series data needs to be made stationary prior to modeling, that is, any tup
 
 Our test statistic is quite large and our p-value is outside the 10% confidence interval, so we cannot reject the null and our series is assumed to not be stationary. 
 
+3. <b>Selecting a Base Model</b>
+Our base model will have the followin parameters:
+
+ARIMA (p, d, q) model:
+- differenced d times
+- AR has order p
+- MA has order q
+
+Our data is differenced once, giving d = 1. Looking at the partial autocorrelations of the differenced data yield an order of 8. This value is quite high, but the results of the Dicky-Fuller test tell us that we don't need to difference again (typically if p>10, you do want do additional differencing). 
+
+![pacf](images/pacf_differenced.png)
+
+We'll let q = 0 for our base model, resulting in a base model of (8,1,0). 
+
+4. <b>Forecasting with our base model</b>
+
+![forecast](images/crime_forecast.png)
 
 
+<!--
 ### Nothing happens at 4am
 
 Do crime reports follow a uniform distribution? My intuition says no - some types of crime require criminals/victim interaction, and these are more likely to occur at different times of day. Plotting both the hour of crime reports and the day of the week show that crime follows a predicatable pattern. 
@@ -182,7 +200,7 @@ Clearly there is no trend in the crime reports vs income. I was unable to quanti
 
 Many of the police districts span both high crime and low crime neighborhoods as well as high income and low income neighborhoods. The consequence of this is that it's difficult to draw correlations between crime reports and demographic variables since most districts have a wide range in demographics.
 
-
+-->
 
 ## Conclusions
 
