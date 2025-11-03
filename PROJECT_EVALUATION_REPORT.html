@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Project Evaluation - SF Crime Analysis</title>
+    <style>
+        @media print {
+            @page {
+                margin: 1in;
+            }
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #95a5a6;
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+
+        h3 {
+            color: #16a085;
+            margin-top: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            border: none;
+            color: white;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+        }
+
+        .executive-summary {
+            background: #ecf0f1;
+            padding: 20px;
+            border-left: 5px solid #3498db;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .grade-box {
+            background: #2ecc71;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .score-section {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+
+        .score-item {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .checkmark {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .warning {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .strength-box {
+            background: #d5f4e6;
+            border-left: 5px solid #2ecc71;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .improvement-box {
+            background: #fff3cd;
+            border-left: 5px solid #f39c12;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .feedback-box {
+            background: #d1ecf1;
+            border: 2px solid #bee5eb;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .code-ref {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        ul {
+            margin: 10px 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        .note {
+            background: #e8f4f8;
+            padding: 10px 15px;
+            border-left: 4px solid #3498db;
+            margin: 15px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>DATA SCIENCE PROJECT EVALUATION REPORT</h1>
+    <p>Crime in San Francisco: 2003-2017</p>
+    <p>Student Level: Beginner (9-month program graduate)</p>
+    <p>Evaluation Date: November 2025</p>
+</div>
+
+<div class="executive-summary">
+    <h2>EXECUTIVE SUMMARY</h2>
+    <p>
+        This project demonstrates <strong>strong technical skills and analytical depth</strong> that exceed
+        expectations for a beginner-level data science student. The student conducted a comprehensive analysis
+        of 2M+ crime records, utilizing advanced techniques including PySpark for data processing, ARIMA time
+        series forecasting, statistical hypothesis testing, and geographic visualization with shapefiles.
+        The analysis is well-motivated by a personal experience, features excellent visualizations, and draws
+        nuanced conclusions (correctly identifying that car theft trends preceded Prop 47 rather than confirming
+        the initial hypothesis). While the project excels in technical execution and communication, there are
+        minor areas for improvement in code organization and reproducibility documentation.
+    </p>
+</div>
+
+<div class="grade-box">
+    RECOMMENDED GRADE: B+ (88/100 points)
+</div>
+
+<h2>DETAILED SCORING BREAKDOWN</h2>
+
+<div class="score-section">
+    <h3>Technical Data Science Skills: 37/40 points</h3>
+
+    <div class="score-item">
+        <strong>Problem Understanding & Approach (7/8 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Clear, compelling problem statement with personal motivation</li>
+            <li><span class="checkmark">✅</span> Multiple well-defined hypotheses (car break-ins vs Prop 47, income correlation, violent crime in Mission)</li>
+            <li><span class="checkmark">✅</span> Appropriate scope for 2-week timeframe with 2M+ records</li>
+            <li><span class="warning">⚠️</span> Slightly loses focus with multiple directions but recovers well with clear conclusions</li>
+        </ul>
+        <p><strong>Justification:</strong> Excellent problem framing. The personal anecdote (witnessing a car break-in)
+        provides authentic motivation, and the student correctly contextualizes Prop 47's potential impact.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>Data Exploration & Understanding (8/8 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Thorough exploration across multiple dimensions: time, location, crime type, resolution rates</li>
+            <li><span class="checkmark">✅</span> Appropriate use of PySpark for initial exploration of 2M+ records</li>
+            <li><span class="checkmark">✅</span> Comprehensive aggregations (by year, hour, day of week, district)</li>
+            <li><span class="checkmark">✅</span> Value counts, filtering, groupby operations all used correctly</li>
+            <li><span class="checkmark">✅</span> Good use of SQL queries within Spark for validation</li>
+        </ul>
+        <p><strong>Justification:</strong> Outstanding EDA. The student explores the dataset from every meaningful
+        angle and demonstrates comfort with both Spark and Pandas.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>Data Preprocessing & Feature Engineering (7/8 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Sensible data pipeline: Spark → filter → Pandas for detailed analysis</li>
+            <li><span class="checkmark">✅</span> Dropped 20+ unnecessary columns appropriately</li>
+            <li><span class="checkmark">✅</span> Datetime parsing handled correctly</li>
+            <li><span class="checkmark">✅</span> Created useful derived features (crime fractions, year-over-year differences, binned GPS coordinates)</li>
+            <li><span class="warning">⚠️</span> Inefficient loading of 15 individual CSV files <span class="code-ref">notebooks/crime_analysis.ipynb:cell-5</span></li>
+            <li><span class="warning">⚠️</span> Some repeated preprocessing across notebooks</li>
+        </ul>
+        <p><strong>Justification:</strong> Strong preprocessing work. The approach is correct though not optimally efficient.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>Model Development & Validation (8/8 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> ARIMA time series model with proper methodology</li>
+            <li><span class="checkmark">✅</span> Stationarity testing with Augmented Dickey-Fuller test (p-value correctly interpreted)</li>
+            <li><span class="checkmark">✅</span> Appropriate differencing to achieve stationarity</li>
+            <li><span class="checkmark">✅</span> ACF/PACF analysis for parameter selection</li>
+            <li><span class="checkmark">✅</span> Model residuals analyzed (identifies that ARIMA(8,1,0) isn't perfect)</li>
+            <li><span class="checkmark">✅</span> Hypothesis testing with Welch's t-test and Mann-Whitney U test</li>
+            <li><span class="checkmark">✅</span> Correlation analysis using appropriate Spearman's method (r=0.76, p=0.0045)</li>
+        </ul>
+        <p><strong>Justification:</strong> Exceptional for beginner level. The student demonstrates strong understanding
+        of statistical methods and properly validates models.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>Results Interpretation (7/8 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Nuanced conclusions (acknowledges car theft trend started ~2011, not 2014)</li>
+            <li><span class="checkmark">✅</span> Correctly rejects initial hypothesis about Prop 47</li>
+            <li><span class="checkmark">✅</span> Strong statistical interpretation (correlation coefficient, p-values)</li>
+            <li><span class="checkmark">✅</span> Acknowledges data limitations (district vs neighborhood granularity)</li>
+            <li><span class="warning">⚠️</span> Could have quantified forecast uncertainty more explicitly</li>
+        </ul>
+        <p><strong>Justification:</strong> Excellent analytical maturity. Student doesn't force data to match hypothesis.</p>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="score-section">
+    <h3>Code Quality: 20/25 points</h3>
+
+    <div class="score-item">
+        <strong>Code Organization & Structure (5/8 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Separate notebooks for different analysis stages</li>
+            <li><span class="checkmark">✅</span> Helper functions extracted to <span class="code-ref">src/helper.py</span> and <span class="code-ref">src/plotter.py</span></li>
+            <li><span class="warning">⚠️</span> Five notebooks with unclear hierarchy (which to run first?)</li>
+            <li><span class="warning">⚠️</span> Experimental/incomplete code left in HeatMap.ipynb</li>
+            <li><span class="warning">⚠️</span> Some duplication between notebooks</li>
+            <li><span class="warning">⚠️</span> Helper functions defined in both notebooks AND helper files</li>
+        </ul>
+        <p><strong>Justification:</strong> Moderate organization. The separation of concerns is good, but execution could be cleaner.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>Readability & Style (4/6 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Generally readable with clear variable names</li>
+            <li><span class="checkmark">✅</span> Some helpful docstrings</li>
+            <li><span class="warning">⚠️</span> Verbose sections (loading crime_2003 through crime_2017 individually)</li>
+            <li><span class="warning">⚠️</span> Inconsistent commenting</li>
+            <li><span class="warning">⚠️</span> Some magic numbers (bins=100, vmin/vmax in plotting)</li>
+        </ul>
+        <p><strong>Justification:</strong> Code is functional and mostly readable, but could be more concise.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>Technical Correctness (6/6 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> No runtime errors observed</li>
+            <li><span class="checkmark">✅</span> Statistical methods applied correctly</li>
+            <li><span class="checkmark">✅</span> Pandas/NumPy operations are sound</li>
+            <li><span class="checkmark">✅</span> Logic is correct throughout</li>
+        </ul>
+        <p><strong>Justification:</strong> Code is technically sound with proper methodology.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>Library & Tool Usage (5/5 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Excellent variety: PySpark, Pandas, Matplotlib, Statsmodels, Scipy, Geopandas, Shapefile</li>
+            <li><span class="checkmark">✅</span> Appropriate tool selection (Spark for 2M records, Pandas for analysis)</li>
+            <li><span class="checkmark">✅</span> Advanced libraries (statsmodels for ARIMA, geopandas for geospatial)</li>
+            <li><span class="checkmark">✅</span> Created animated GIF with geographic overlay</li>
+        </ul>
+        <p><strong>Justification:</strong> Outstanding use of diverse libraries appropriate to each task.</p>
+    </div>
+</div>
+
+<div class="score-section">
+    <h3>Documentation & Communication: 19/20 points</h3>
+
+    <div class="score-item">
+        <strong>Notebook Narrative & Explanations (7/8 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Excellent README with compelling introduction</li>
+            <li><span class="checkmark">✅</span> Clear markdown cells explaining methodology</li>
+            <li><span class="checkmark">✅</span> Hypotheses stated clearly before testing</li>
+            <li><span class="checkmark">✅</span> Personal narrative adds authenticity</li>
+            <li><span class="warning">⚠️</span> Some notebooks (HeatMap.ipynb) lack narrative</li>
+            <li><span class="warning">⚠️</span> Minor typo in README line 7: "Introdution"</li>
+        </ul>
+        <p><strong>Justification:</strong> Very strong communication overall, minor gaps in some notebooks.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>Visualizations (6/6 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Diverse chart types: stacked plots, line plots, tree maps, scatter plots, heatmaps, time series</li>
+            <li><span class="checkmark">✅</span> Professional appearance with proper labels, legends, titles</li>
+            <li><span class="checkmark">✅</span> Appropriate color choices (red-blue for crime heatmaps)</li>
+            <li><span class="checkmark">✅</span> High-quality exports (dpi=350)</li>
+            <li><span class="checkmark">✅</span> Animated GIF showing crime evolution over years</li>
+            <li><span class="checkmark">✅</span> Shapefile overlay for geographic context</li>
+        </ul>
+        <p><strong>Justification:</strong> Exceptional visualizations that effectively communicate insights.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>Key Findings & Conclusions (6/6 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Clear conclusions section in README</li>
+            <li><span class="checkmark">✅</span> Findings well-supported by statistical evidence</li>
+            <li><span class="checkmark">✅</span> Honest about disconfirmed hypotheses</li>
+            <li><span class="checkmark">✅</span> Practical implications discussed</li>
+            <li><span class="checkmark">✅</span> Identifies data limitations and future work needs</li>
+        </ul>
+        <p><strong>Justification:</strong> Excellent synthesis of findings with intellectual honesty.</p>
+    </div>
+</div>
+
+<div class="score-section">
+    <h3>Reproducibility & Best Practices: 12/15 points</h3>
+
+    <div class="score-item">
+        <strong>Project Organization (4/5 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Clear folder structure: notebooks/, src/, data/, images/, AnalysisNeighborhoods/</li>
+            <li><span class="checkmark">✅</span> Logical separation of code, data, and outputs</li>
+            <li><span class="warning">⚠️</span> Image duplication (images/ and data/images/ have overlapping content)</li>
+            <li><span class="warning">⚠️</span> Some data files not tracked or documented</li>
+        </ul>
+        <p><strong>Justification:</strong> Good organization with minor redundancies.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>Reproducibility (3.5/5 pts)</strong>
+
+        <p><strong>What the student did RIGHT:</strong></p>
+        <ul>
+            <li><span class="checkmark">✅</span> Provided clear data source link in README</li>
+            <li><span class="checkmark">✅</span> <strong>Correctly did NOT include 2M+ record dataset in repo</strong> - this follows GitHub best practices</li>
+            <li><span class="checkmark">✅</span> Cited all data sources at bottom of README</li>
+        </ul>
+
+        <p><strong>What still needs improvement:</strong></p>
+        <ul>
+            <li><span class="cross">❌</span> No requirements.txt or environment.yml file</li>
+            <li><span class="cross">❌</span> No installation/setup instructions</li>
+            <li><span class="cross">❌</span> Hard-coded paths (e.g., '../Police_Department_Incident_Reports...')</li>
+            <li><span class="warning">⚠️</span> Docker/Spark setup mentioned but not documented</li>
+            <li><span class="warning">⚠️</span> Unclear which notebook to run first</li>
+        </ul>
+        <p><strong>Justification:</strong> The student followed best practices for data management but still needs
+        dependency documentation and setup instructions.</p>
+    </div>
+
+    <div class="score-item">
+        <strong>README & Documentation (4.5/5 pts)</strong>
+        <ul>
+            <li><span class="checkmark">✅</span> Excellent README with table of contents, images, narrative</li>
+            <li><span class="checkmark">✅</span> Notes section explains notebook structure</li>
+            <li><span class="checkmark">✅</span> Data sources cited with links</li>
+            <li><span class="checkmark">✅</span> Clear description of methodology</li>
+            <li><span class="warning">⚠️</span> Minor typo (line 7: "Introdution")</li>
+            <li><span class="warning">⚠️</span> Could include setup instructions</li>
+        </ul>
+        <p><strong>Justification:</strong> Outstanding README that tells a compelling story.</p>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>STRENGTHS</h2>
+
+<div class="strength-box">
+    <h3>1. Advanced Technical Skills</h3>
+    <p>The student demonstrates proficiency well beyond beginner level, successfully implementing ARIMA forecasting,
+    hypothesis testing with multiple methods (Welch's t-test, Mann-Whitney U), and handling 2M+ records with PySpark.
+    The time series analysis shows sophisticated understanding of stationarity, differencing, and model validation.</p>
+</div>
+
+<div class="strength-box">
+    <h3>2. Exceptional Visualizations</h3>
+    <p>The diversity and quality of visualizations are outstanding. The animated GIF with shapefile overlay is
+    particularly impressive, as are the professional-quality matplotlib plots with dual axes, proper legends, and
+    thoughtful color schemes. Every visualization effectively communicates insights.</p>
+</div>
+
+<div class="strength-box">
+    <h3>3. Intellectual Honesty & Analytical Maturity</h3>
+    <p>The student doesn't force conclusions to match initial hypotheses. The admission that car theft trends began
+    before Prop 47 (contradicting the initial hypothesis) and the honest discussion of data limitations demonstrate
+    excellent scientific thinking.</p>
+</div>
+
+<div class="strength-box">
+    <h3>4. Comprehensive Analysis Scope</h3>
+    <p>The project explores the dataset from multiple angles (temporal, geographic, categorical) and incorporates
+    external data (median income) to test correlations. The analysis addresses the primary question while exploring
+    tangential interesting patterns (crime by time of day, violent vs non-violent resolution rates).</p>
+</div>
+
+<div class="strength-box">
+    <h3>5. Clear Communication</h3>
+    <p>The README provides an engaging narrative arc from personal experience to data-driven conclusions. Markdown
+    cells in notebooks appropriately explain methodology with clear examples.</p>
+</div>
+
+<h2>AREAS FOR IMPROVEMENT</h2>
+
+<div class="improvement-box">
+    <h3>1. Dependency Documentation ⭐ CRITICAL</h3>
+    <p>Add a <span class="code-ref">requirements.txt</span> or <span class="code-ref">environment.yml</span> file
+    listing all dependencies. Include setup instructions for Spark/Docker. Provide clear instructions on data
+    download and which notebooks to run in what order. This is essential for professional data science work.</p>
+
+    <p><strong>Example requirements.txt:</strong></p>
+    <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+pandas==1.3.0
+numpy==1.21.0
+matplotlib==3.4.2
+pyspark==3.1.2
+geopandas==0.9.0
+pyshp==2.1.3
+statsmodels==0.12.2
+scipy==1.7.0
+squarify==0.4.3</pre>
+</div>
+
+<div class="improvement-box">
+    <h3>2. Code Efficiency & Organization</h3>
+    <p>Refactor repetitive code, especially the 15 individual CSV loads. Consider a single "main" notebook that
+    imports from others, or a script to run analyses in sequence. Remove experimental code from HeatMap.ipynb or
+    clearly mark it as exploratory. Create a consistent pattern for using helper functions vs inline code.</p>
+</div>
+
+<div class="improvement-box">
+    <h3>3. Model Uncertainty Quantification</h3>
+    <p>While the ARIMA forecast is shown, include confidence intervals on predictions. Discuss the practical
+    implications of the residual patterns identified - what patterns remain unexplained and why might that be?</p>
+</div>
+
+<div class="improvement-box">
+    <h3>4. Validation of Geographic Analysis</h3>
+    <p>The Mission District analysis uses hardcoded GPS boundaries. Validate these coordinates against official
+    neighborhood boundaries and document the source. Consider whether the shapefile Analysis Neighborhoods could
+    provide better boundaries than manual coordinates.</p>
+</div>
+
+<div class="improvement-box">
+    <h3>5. Statistical Reporting Completeness</h3>
+    <p>While hypothesis tests are conducted correctly, report effect sizes alongside p-values. For example, in the
+    violent vs non-violent crime timing analysis, the mean difference is ~0.55 hours - is this practically
+    significant for policing decisions?</p>
+</div>
+
+<h2>RED FLAGS</h2>
+
+<div class="note">
+    <strong>None identified.</strong>
+    <ul style="margin-top: 10px;">
+        <li>✅ All code appears functional (no fatal errors)</li>
+        <li>✅ Statistical methodology is sound</li>
+        <li>✅ No plagiarism indicators (personal narrative, custom analysis)</li>
+        <li>✅ Results match claims made in README</li>
+        <li>✅ All core requirements met (EDA with pandas, visualizations, conclusions in markdown)</li>
+    </ul>
+</div>
+
+<div class="page-break"></div>
+
+<h2>STUDENT-FACING FEEDBACK</h2>
+
+<div class="feedback-box">
+    <p>Your project demonstrates impressive technical skills and analytical depth! The time series forecasting,
+    hypothesis testing, and geographic visualizations show you've gone well beyond the basic requirements. I
+    particularly appreciate your intellectual honesty in acknowledging that the car theft increase preceded Prop 47,
+    even though it contradicted your initial hypothesis.</p>
+
+    <p><strong>You also correctly provided a link to the dataset rather than including it in the repository—this
+    follows best practices for working with large data files.</strong></p>
+
+    <p>Your main area for improvement is adding a <span class="code-ref">requirements.txt</span> file and setup
+    instructions so others can easily install dependencies and replicate your environment. Also, consider
+    consolidating your notebooks and removing experimental code for a cleaner final submission.</p>
+
+    <p><strong>Excellent work overall—this shows strong data science thinking!</strong></p>
+</div>
+
+<h2>FINAL GRADE SUMMARY</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Points Earned</th>
+            <th>Points Possible</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Technical Data Science Skills</strong></td>
+            <td>37</td>
+            <td>40</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Problem Understanding & Approach</td>
+            <td>7</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Data Exploration & Understanding</td>
+            <td>8</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Data Preprocessing & Feature Engineering</td>
+            <td>7</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Model Development & Validation</td>
+            <td>8</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Results Interpretation</td>
+            <td>7</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td><strong>Code Quality</strong></td>
+            <td>20</td>
+            <td>25</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Code Organization & Structure</td>
+            <td>5</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Readability & Style</td>
+            <td>4</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Technical Correctness</td>
+            <td>6</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Library & Tool Usage</td>
+            <td>5</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td><strong>Documentation & Communication</strong></td>
+            <td>19</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Notebook Narrative & Explanations</td>
+            <td>7</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Visualizations</td>
+            <td>6</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Key Findings & Conclusions</td>
+            <td>6</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td><strong>Reproducibility & Best Practices</strong></td>
+            <td>12</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Project Organization</td>
+            <td>4</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">Reproducibility</td>
+            <td>3.5</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 30px;">README & Documentation</td>
+            <td>4.5</td>
+            <td>5</td>
+        </tr>
+        <tr style="background-color: #2ecc71; color: white; font-weight: bold;">
+            <td><strong>TOTAL SCORE</strong></td>
+            <td><strong>88</strong></td>
+            <td><strong>100</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="note" style="margin-top: 30px;">
+    <h3>Grade Scale Interpretation</h3>
+    <p>This is a <strong>solid B+</strong> that approaches A- territory (90+). The technical work is exceptional
+    for a beginner-level student (truly A-level), but minor issues in code organization and lack of dependency
+    documentation prevent a higher grade. With a <span class="code-ref">requirements.txt</span> file and basic
+    setup documentation, this would easily reach A- level.</p>
+
+    <p style="margin-top: 15px;"><strong>The student should be proud of this work</strong> while understanding
+    that professional data science requires attention to reproducibility and code cleanliness.</p>
+</div>
+
+<h2>ADDITIONAL NOTES</h2>
+
+<div class="note">
+    <h3>For the Instructor:</h3>
+    <p>This student clearly has strong potential and is ready for more advanced coursework. Consider suggesting they:</p>
+    <ul>
+        <li>Explore machine learning classification (predicting crime type from features)</li>
+        <li>Investigate SARIMA for seasonal time series components</li>
+        <li>Learn about CI/CD pipelines and Docker for reproducible environments</li>
+    </ul>
+
+    <p style="margin-top: 15px;"><strong>Teaching Moment:</strong> This project is an excellent example to show
+    future students about the importance of reproducibility documentation. The analysis itself is excellent, but
+    its impact is limited if others can't reproduce it.</p>
+
+    <p style="margin-top: 15px;"><strong>Notable Achievement:</strong> The student successfully worked with a 2M+
+    record dataset requiring distributed computing (Spark), which demonstrates initiative and technical capability
+    beyond the typical beginner project.</p>
+</div>
+
+<hr style="margin: 40px 0;">
+
+<div style="text-align: center; color: #7f8c8d; font-size: 0.9em;">
+    <p><em>This evaluation was conducted using the provided rubric with constructive, beginner-friendly grading philosophy.</em></p>
+    <p><em>Focus: Correct methodology > Code elegance > Advanced techniques</em></p>
+</div>
+
+</body>
+</html>
